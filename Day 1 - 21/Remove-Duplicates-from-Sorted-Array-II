@@ -1,0 +1,30 @@
+class Solution {
+    public int removeDuplicates(int[] nums) {
+/*        
+        // Approach 1 - Not Working
+        int count = 1, index = 1;
+        for(int i=1 ; i<nums.length ; i++){
+            if(nums[i] == nums[i - 1]) {
+                count++;
+            }else{
+                count = 1;
+            }
+
+            
+            if(count <= 2)
+                nums[index] = nums[i];
+                index++;   
+        }
+        return index;
+*/
+        // Approach 2
+        int idx = 2;
+        for(int i=2 ; i<nums.length ; i++){
+            if(nums[i] != nums[idx-2]){
+                nums[idx] = nums[i];
+                idx++;
+            }
+        }
+        return idx;
+    }
+}

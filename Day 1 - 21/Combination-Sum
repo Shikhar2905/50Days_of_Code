@@ -1,0 +1,36 @@
+class Solution {
+    public static void func(int start, int candidates[], int target, int currSum, List<Integer> temp, List<List<Integer>> finalList){
+        if(currSum == target) finalList.add(new ArrayList<>(temp));     // Base Case
+        if(currSum > target) return;
+
+        for(int i=start ; i<candidates.length ; i++){                   // Set 'i' to 'start' to get unique sets
+            temp.add(candidates[i]);                                    
+            currSum += candidates[i];                                   // adding element which can contribute to sum
+
+            func(i, candidates, target, currSum, temp, finalList);      // Recursion
+            
+            temp.remove(temp.size()-1);                                 // Backtracking
+            currSum = currSum - candidates[i];
+        }
+
+        // Another way of writing the same code
+        /*
+        for(int i=start ; i<candidates.length ; i++){
+            temp.add(candidates[i]);
+            currSum += candidates[i];
+            
+            if(currSum == target) finalList.add(new ArrayList<>(temp));                             
+            else if(currSum < target) func(i, candidates, target, currSum, temp, finalList);        
+            
+            temp.remove(temp.size()-1);                     
+            currSum = currSum - candidates[i];
+        }
+        */
+    }
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<Integer> temp = new ArrayList<>();
+        List<List<Integer>> finalList = new ArrayList<>();
+        func(0, candidates, target, 0, temp, finalList);
+        return finalList;
+    }
+}

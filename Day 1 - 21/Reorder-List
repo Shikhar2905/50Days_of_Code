@@ -1,0 +1,28 @@
+class Solution {
+    public void reorderList(ListNode head) {
+        ListNode curr = head;
+        int numOfNodes = 0;
+        Stack<ListNode> stack = new Stack<>();           // store every node in stack and find num of nodes
+        while(curr!=null){
+            stack.push(curr);
+            numOfNodes++;
+            curr = curr.next;
+        }
+
+        curr = head;
+        for(int i=0 ; i<numOfNodes/2 ; i++){   // go till (total number of nodes / 2) nodes and add element present at top  
+            ListNode temp = stack.pop();
+            temp.next = curr.next;
+            curr.next = temp;
+            curr = curr.next.next;
+
+            if( i == (numOfNodes/2) - 1){
+                if(numOfNodes % 2 != 0){
+                    curr.next = null;
+                }else{
+                    temp.next = null;
+                }
+            }
+        }  
+    }
+}

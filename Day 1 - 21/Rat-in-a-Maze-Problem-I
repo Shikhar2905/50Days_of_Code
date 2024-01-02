@@ -1,0 +1,49 @@
+class Solution {
+    public static void findPath(int[][] m, int n, int row, int col, ArrayList<String> list, String ans){
+        // base case
+        if(row == n-1 && col == n-1){
+            list.add(ans);
+            return;
+        }
+        if(m[row][col] == 0){
+            return;
+        }
+        
+        // Left
+        if(col - 1 >= 0 && m[row][col - 1] == 1){
+            m[row][col] = 0;
+            findPath(m, n, row, col - 1, list, ans + 'L');
+            m[row][col] = 1;
+        }
+        
+        // Right
+        if(col + 1 < n && m[row][col + 1] == 1){
+            m[row][col] = 0;
+            findPath(m, n, row, col + 1, list, ans + 'R');
+            m[row][col] = 1;
+        }
+        
+        // Down
+        if(row + 1 < n && m[row + 1][col] == 1){
+            m[row][col] = 0;
+            findPath(m, n, row + 1, col, list, ans + 'D');
+            m[row][col] = 1;
+        }
+        
+        // Up
+        if(row - 1 >= 0 && m[row - 1][col] == 1){
+            m[row][col] = 0;
+            findPath(m, n, row - 1, col, list, ans + 'U');
+            m[row][col] = 1;
+        }
+        
+        return;
+    }
+    
+    public static ArrayList<String> findPath(int[][] m, int n) {
+        // Your code here
+        ArrayList<String> list = new ArrayList<>();
+        findPath(m, n, 0, 0, list, "");
+        return list;
+    }
+}

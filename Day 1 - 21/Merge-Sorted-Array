@@ -1,0 +1,60 @@
+class Solution {
+    // Method 1: Two Pointer Approach, Constant Space
+    public void merge1(int nums1[], int m, int nums2[], int n){
+        int i = m - 1;
+        int j = n - 1;
+        int k = nums1.length - 1;
+
+        while(j >= 0){
+            if(i >= 0 && nums1[i] > nums2[j]){
+                nums1[k] = nums1[i];
+                i--;
+            }else{
+                nums1[k] = nums2[j];
+                j--;
+            }
+            k--;
+        }
+    }
+
+/*
+    // Method 2: Two Pointer Approach, Space - O(m + n)
+    public void merge2(int[] nums1, int m, int[] nums2, int n) {
+        // Method 1 : Space : O(n)
+        int ans[] = new int[m + n];
+        int i = 0, j = 0 , k = 0;
+        while(i < m && j < n){
+            if(nums1[i] < nums2[j]){
+                ans[k] = nums1[i];
+                i++;
+            }else{
+                ans[k] = nums2[j];
+                j++;
+            }
+            k++;
+        }
+
+        while(i < m){               // num1 yet to fill
+            ans[k] = nums1[i];
+            k++;
+            i++;
+        }
+        while(j < n){               // nums2 yet to fill
+            ans[k] = nums2[j];
+            k++;
+            j++;
+        }
+
+        i = 0;
+        for( ; i<nums1.length ; i++){       // update num1
+            nums1[i] = ans[i];
+        }
+    }
+*/
+
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        merge1(nums1, m, nums2, n);
+    }
+}
+
+ 

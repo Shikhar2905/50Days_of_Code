@@ -1,0 +1,31 @@
+class Solution {
+    public int removeElement(int[] nums, int val) {
+/*        
+        // Two Pointer Approach,  Constant Space(only used given space of array)
+        int k = 0, s = 0, e = nums.length - 1;
+        while(s <= e){
+            if(nums[s] == val){
+                // swap
+                nums[s] = nums[e];
+                nums[e] = 0;
+                e--;
+            }else {
+                k++;
+                s++;
+            }
+        }
+        return k;
+*/
+
+        // Shorter Approach
+        int index = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != val) {
+                nums[index] = nums[i];
+                index++;
+            }
+        }
+        return index;
+    }
+}
+

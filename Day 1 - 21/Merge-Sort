@@ -1,0 +1,50 @@
+class Solution
+{
+    void merge(int arr[], int l, int m, int r)
+    {
+         int temp[] = new int[r - l + 1];
+         int i = l;             //index to iterate left array
+         int j = m + 1;         //index to iterate right array
+         int k = 0;             //index to iterate temp array
+         
+         // compare left and right part and fill smallest
+         while(i<=m && j<=r){
+             if(arr[i] < arr[j]){
+                 temp[k] = arr[i];
+                 i++;
+             }else{
+                 temp[k] = arr[j];
+                 j++;
+             }
+             k++;
+         }
+         
+         // fill left part
+         while(i<=m){
+             temp[k] = arr[i];
+             i++; k++;
+         }
+         
+         // fill right part
+         while(j<=r){
+             temp[k] = arr[j];
+             j++; k++;
+         }
+         
+         // copy elements to origianl array
+         for(i=l ,k=0 ; k<temp.length ; i++,k++){
+             arr[i] = temp[k];
+         }
+    }
+    
+    void mergeSort(int arr[], int l, int r)
+    {
+        if(l>=r){
+            return;
+        }
+        int mid = l + (r - l)/2;
+        mergeSort(arr, l, mid);
+        mergeSort(arr, mid+1, r);
+        merge(arr,l, mid, r);
+    }
+}

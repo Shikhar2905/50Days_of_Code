@@ -1,0 +1,36 @@
+// Reference Link
+// https://www.geeksforgeeks.org/longest-possible-route-in-a-matrix-with-hurdles/
+
+import java.util.ArrayList;
+public class Longest_Possible_Route_in_a_Matrix_with_Hurdles {
+    public static int findPath2(int [][]m, int row, int col, int totalRows, int totalCols, int curr, int ans){
+        if(row == totalRows - 1 && col == totalCols - 1){    // Base Case - Path found
+            if(curr > ans) ans = curr;
+            return ans;
+        }
+
+        if(m[row][col] == 0 || m[totalRows-1][totalCols-1] == 0) return ans;    // Source or Destination is obstructed
+    
+        m[row][col] = 0;    // Mark as visited
+
+        if(col != totalCols - 1 && m[row][col + 1] == 1) ans = findPath2(m, row, col + 1, totalRows, totalCols, curr+1, ans);      // Right 
+        if(row != totalRows-1 && m[row + 1][col] == 1) ans = findPath2(m, row + 1, col, totalRows, totalCols, curr+1, ans);        // Down
+        if(col != 0 && m[row][col - 1] == 1) ans = findPath2(m, row, col-1, totalRows, totalCols, curr+1, ans);                    // Left
+        if(row != 0 && m[row - 1][col] == 1) ans = findPath2(m, row - 1, col, totalRows, totalCols, curr+1, ans);                  // Up
+           
+        m[row][col] = 1;        // Backtracking
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int m[][] = { { 1, 1, 1, 1 },
+        { 1, 1, 0, 1 },
+        { 1, 1, 1, 1 } };
+
+        int totalRows = m.length;
+        int totalCols = m[0].length;
+        int ans = findPath2(m, 0,0, totalRows, totalCols, 0, -1);
+        System.out.println(ans);
+    }
+}
