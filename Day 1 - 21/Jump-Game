@@ -1,0 +1,31 @@
+class Solution {
+    // Valley peak approach, Time Complexity - O(n), Space - O(1)
+    // Approach - Keep updating the maximun index you can reach after taking the jumps
+    public boolean func1(int nums[]){
+        int reachable = 0;
+        for(int i=0 ; i<nums.length ; i++){
+            if(reachable < i) return false;
+
+            reachable = Math.max(reachable, i + nums[i]);
+        }
+        return true;
+    }
+
+    // Recursion & Backtracking - TLE
+    public boolean func2(int nums[], int i){
+        if(i == nums.length - 1) return true;       // Base Case
+        
+        int curr = nums[i];
+        for(int steps=1 ; steps<=curr ; steps++){       // Check for each step starting from 1 to max no of steps(nums[i])
+            if(func2(nums,i+steps)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean canJump(int[] nums) {
+        return func1(nums);
+        //return func2(nums,0);
+    }
+}
