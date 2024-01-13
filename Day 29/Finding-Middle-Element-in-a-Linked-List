@@ -1,0 +1,31 @@
+
+
+/* Node of a linked list
+ class Node {
+   int data;
+    Node next;
+    Node(int d)  { data = d;  next = null; }
+}
+*/
+
+class Solution
+{
+    int getMiddle(Node head)
+    {
+         // Your code here.
+         
+         Node slowptr = head;
+         Node fastptr = head;
+         while(fastptr != null){
+             if(fastptr.next == null){
+                 return slowptr.data;
+             }
+             if(fastptr.next.next == null){
+                 return slowptr.next.data;
+             }
+             slowptr = slowptr.next;
+             fastptr = fastptr.next.next;
+         }
+         return -1;
+    }
+}
