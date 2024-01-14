@@ -1,0 +1,39 @@
+
+
+//function Template for Java
+
+/* linked list node class:
+
+class Node {
+    int value;
+    Node next;
+    Node(int value) {
+        this.value = value;
+    }
+}
+
+*/
+
+class Solution
+{
+    //Function to reverse a linked list.
+    Node reverseList(Node head)
+    {
+        // code here
+        // Method - 1 : Iterative 
+        if(head==null || head.next==null){
+            return head;
+        }
+        
+        Node prev = head;
+        Node curr = head.next;
+        while(curr != null){
+            Node nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        head.next = null;
+        return prev;
+    }
+}
