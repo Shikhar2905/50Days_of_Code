@@ -1,0 +1,90 @@
+
+
+/* Node of a linked list
+ class Node {
+   int data;
+    Node next;
+    Node(int d)  { data = d;  next = null; }
+}
+ Linked List class
+class LinkedList
+{
+    Node head;  // head of list
+}*/
+
+class Intersect
+{
+    int numOfNodes(Node head){                                  // number of nodes in LL
+        int count = 0;
+        while(head!=null){
+            count++;
+            head = head.next;
+        }
+        return count;
+    }
+    
+    
+    Node getIntersectionNode(int d , Node biggerLL , Node smallerLL){               // returns Intersecting node
+        
+        for(int i=0 ; i<d ; i++){                                   // bigger ll will be iterated till the difference of nodes
+            biggerLL = biggerLL.next;
+        }
+        
+        while( biggerLL != null && smallerLL != null ){             // both ll are at same level ( both have same number of nodes remaining )
+            if( biggerLL == smallerLL ){
+                return biggerLL;
+            }
+            biggerLL = biggerLL.next;
+            smallerLL = smallerLL.next;
+        }
+        
+        return null;
+    }
+    
+	int intersectPoint(Node head1, Node head2)
+	{
+	    // Method - 2 : HashSet
+	    /*
+	    HashSet<Node> set = new HashSet<>();
+	    
+	    while(head1 != null){              
+	        set.add(head1);
+	        head1 = head1.next;
+	    }
+	    
+	    while(head2 != null){
+	        if( set.contains(head2) ){
+	            return head2.data;
+	        }
+	    }
+	    
+	    return -1;
+	    */
+	    
+	    
+	    
+	    // Method - 3 : Difference in node counts
+	    
+	    int count1 = numOfNodes(head1);
+	    int count2 = numOfNodes(head2);
+	    int d;
+	    Node ans;
+	    
+	    if(count1>count2){
+	        d = count1 - count2;  
+	        ans = getIntersectionNode(d,head1,head2);
+	    }
+	    else{
+	        d = count2 - count1;
+	        ans = getIntersectionNode(d,head2,head1);
+	    }
+	    
+	    
+	    if(ans == null){
+	        return -1;
+	    }else{
+	        return ans.data;
+	    }
+	    
+	}
+}
