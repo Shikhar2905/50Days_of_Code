@@ -1,0 +1,45 @@
+
+//User function Template for Java
+
+class Solution
+{
+    void deleteMidRec(Stack<Integer> s , int sizeOfStack , int count){
+        //base case
+        if( count == sizeOfStack/2 ){
+            s.pop();
+            return;
+        }
+        
+        int topElem = s.peek();                      // remove top element and send new stack for recursive call
+        s.pop();
+        
+        deleteMidRec( s , sizeOfStack , count + 1 );
+        
+        s.push( topElem );                          // push element which you removed
+    }
+    
+    //Function to delete middle element of a stack.
+    public void deleteMid(Stack<Integer>s,int sizeOfStack){
+        // code here
+        
+        // Method 1 : create another stack 
+        /*
+        Stack<Integer> temp = new Stack<>();
+        
+        for(int i = 0 ; i < sizeOfStack/2 ; i++){
+            temp.push( s.pop() );
+        }
+        
+        s.pop();
+        
+        while( ! temp.isEmpty() ){
+            s.push( temp.pop() );
+        }
+        */
+        
+        
+        // Method 2 : RECURRSION
+        int count = 0;
+        deleteMidRec(s,sizeOfStack,count);
+    } 
+}
