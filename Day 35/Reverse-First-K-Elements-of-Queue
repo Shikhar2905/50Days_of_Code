@@ -1,0 +1,43 @@
+
+
+// User function Template for Java
+
+class GfG {
+    
+    void modifyQueueRec( Queue<Integer> q , int k , int count , Queue<Integer> temp ){
+
+        if( count > k  ){                       //base case : current element is next of k elements
+            while( ! q.isEmpty() ){             // we will add all remaing elements in temp queue
+                temp.add( q.remove() );
+            }
+            return;
+        }
+        
+        int front = q.peek();
+        q.remove();
+        
+        // Do recurrsive call until you reach base case
+        modifyQueueRec( q , k , count + 1 , temp );
+        
+        q.add( front );                             // use for reversing
+        
+        if( q.size() == k ){                        // we have reversed k elements
+            while( ! temp.isEmpty() ){              // now add elemets presnt in temp , 
+                q.add( temp.remove() );             // which are the remaing elements
+            }
+        }
+    }
+    
+    
+    public Queue<Integer> modifyQueue(Queue<Integer> q, int k) {
+        
+        if( k > q.size() ){
+            return q;
+        }
+        
+        Queue<Integer> temp = new LinkedList<>();
+        modifyQueueRec( q , k , 1 , temp );
+        
+        return q;
+    }
+}
