@@ -1,0 +1,40 @@
+//User function Template for Java
+
+/*Tree Node
+class Node {
+    int data;
+    Node left;
+    Node right;
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+} 
+*/
+
+class Solution
+{
+    public static void function(Node root,int currSum, int sum, ArrayList<Integer> currPath, ArrayList<ArrayList<Integer>> finalAns){
+        if(root == null) return;
+        
+        currPath.add(root.data);
+       
+        if( (currSum + root.data) == sum) finalAns.add(new ArrayList<>(currPath));
+
+        function(root.left, currSum + root.data, sum, currPath, finalAns);
+        function(root.right, currSum + root.data, sum, currPath, finalAns);
+        
+        currPath.remove(currPath.size() - 1); 
+    }
+    
+    public static ArrayList<ArrayList<Integer>> printPaths(Node root, int sum)
+    {
+        ArrayList<ArrayList<Integer>> finalAns = new ArrayList<>();
+        ArrayList<Integer> currPath = new ArrayList<>();
+        function(root, 0, sum, currPath, finalAns);
+        return finalAns;
+    }
+}
+
+
