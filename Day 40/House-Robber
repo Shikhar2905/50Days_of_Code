@@ -1,0 +1,19 @@
+class Solution {
+    public int rob(int[] nums) {
+        // int even = 0, odd = 0;
+        // for(int i=0 ; i<nums.length ; i+=2){
+        //     even += nums[i];
+        //     if(i + 1 < nums.length) odd += nums[i+1];
+        // }
+        // return Math.max(even, odd);
+
+        int rob = 0, noRob = 0;
+        for(int i=0 ; i<nums.length ; i++){
+            int newRob = noRob + nums[i];
+            int newNoRob = Math.max(rob, noRob);
+            rob = newRob;
+            noRob = newNoRob;
+        }
+        return Math.max(rob, noRob);
+    }
+}
