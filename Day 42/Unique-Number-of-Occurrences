@@ -1,0 +1,19 @@
+class Solution {
+    public static boolean isFrequencyUnique(int n, int[] arr) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        HashSet<Integer> set = new HashSet<>();
+        
+        for(int nums : arr){
+            if(map.containsKey(nums)) map.put(nums, map.get(nums) + 1);
+            else map.put(nums, 1);
+        }
+        
+        for(Integer i : map.keySet()){
+            if(set.contains( map.get(i) )) return false;
+            else set.add(map.get(i));
+        }
+        
+        return true;
+    }
+}
+        
