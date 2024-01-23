@@ -1,0 +1,18 @@
+class Solution
+{
+    public int countWords(String list[], int n)
+    {
+        HashMap<String, Integer> map = new HashMap<>();
+        for(String s : list){
+            if(map.containsKey(s)) map.put(s, map.get(s) + 1);
+            else map.put(s, 1);
+        }
+        
+        int count = 0;
+        for(String s : map.keySet()){
+            if(map.get(s) == 2) count++;
+        }
+        
+        return count;
+    }
+}
