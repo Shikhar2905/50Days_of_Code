@@ -1,0 +1,50 @@
+
+
+//User function Template for Java
+
+
+/* A binary tree node class
+class Node
+{
+	int data;
+	Node left,right;
+	
+	Node(int d)
+	{
+		data = d;
+		left = right = null;		
+	}
+} */
+
+class Tree
+{
+    int height(Node root){
+        if(root==null){
+            return 0;
+        }
+        int left = height(root.left);
+        int right = height(root.right);
+        
+        return Math.max(left,right) + 1;
+    }
+    
+    //Function to check whether a binary tree is balanced or not.
+    boolean isBalanced(Node root){
+        
+        if(root==null){
+            return true;
+        }
+        
+        int leftHeight = height(root.left);                     // height of left subtree
+        int rightHeight = height(root.right);                   // height of right subtree
+        
+        if( Math.abs(leftHeight - rightHeight) > 1){            // check condition for balanced tree
+            return false;
+        }
+                                                                // condition was not false so check for left and right part
+        boolean leftSubTree = isBalanced(root.left);
+        boolean rightSubTree = isBalanced(root.right);
+        
+        return (leftSubTree && rightSubTree) ;                  // if condition will be false anywhere in left or right part, it will return false, else will return true
+    }
+}
