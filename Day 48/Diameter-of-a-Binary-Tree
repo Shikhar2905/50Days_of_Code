@@ -1,0 +1,41 @@
+
+
+// User function Template for Java
+
+/*class Node {
+    int data;
+    Node left;
+    Node right;
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}*/
+
+class Solution {
+    static class Info{
+        int diam;
+        int ht;
+        public Info(int diam, int ht){
+            this.diam = diam;
+            this.ht = ht;
+        }
+    }
+    
+    Info diameterFunction(Node root){
+        if(root == null)    return new Info(0,0);
+        
+        Info leftInfo = diameterFunction(root.left);
+        Info rightInfo = diameterFunction(root.right);
+        int diam = Math.max( Math.max(leftInfo.diam, rightInfo.diam), leftInfo.ht + rightInfo.ht + 1);
+        int ht = Math.max(leftInfo.ht, rightInfo.ht) + 1;
+        
+        return new Info(diam, ht);
+    }
+    
+    int diameter(Node root) {
+        Info obj = diameterFunction(root);
+        return obj.diam;
+    }
+}
